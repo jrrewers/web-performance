@@ -39,3 +39,13 @@ gulp.task('js-concat', () => {
             presets: ['es2015']}))
         .pipe(gulp.dest('./build/js'))
 })
+
+gulp.task('watch-concat', () => {
+    gulp.watch('./src/js/**/*', ['js-concat'])
+    gulp.watch('./src/sass/**/*.scss', ['sass-concat'])
+})
+
+gulp.task('watch', () => {
+    gulp.watch('./src/js/**/*', ['js'])
+    gulp.watch('./src/sass/**/*.scss', ['sass'])
+})
