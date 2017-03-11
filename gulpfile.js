@@ -7,7 +7,7 @@ const gulp = require('gulp'),
 
 gulp.task('sass-concat', () => {
     return gulp.src('./src/sass/**/*.scss')
-        .pipe(concat('styles.css'))
+        .pipe(concat('styles-concat.css'))
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./build/css'))
 })
@@ -34,8 +34,18 @@ gulp.task('js', () => {
 
 gulp.task('js-concat', () => {
     return gulp.src('./src/js/**/*.js')
-        .pipe(concat('scripts.js'))
+        .pipe(concat('scripts-concat.js'))
         .pipe(babel({
             presets: ['es2015']}))
         .pipe(gulp.dest('./build/js'))
+})
+
+gulp.task('watch-concat', () => {
+    gulp.watch('./src/js/**/*', ['js-concat'])
+    gulp.watch('./src/sass/**/*.scss', ['sass-concat'])
+})
+
+gulp.task('watch', () => {
+    gulp.watch('./src/js/**/*', ['js'])
+    gulp.watch('./src/sass/**/*.scss', ['sass'])
 })
